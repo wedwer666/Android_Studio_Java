@@ -19,6 +19,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!--code for push service from Firebase google-->
+        <service android:name=".MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT">
+
+                </action>
+            </intent-filter>
+        </service>
+        <!--code for messaging service in Firebase-->
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT">
+
+                </action>
+            </intent-filter>
+        </service>
     </application>
+    
 
 </manifest>
