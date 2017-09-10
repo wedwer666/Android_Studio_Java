@@ -12,7 +12,17 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
 
-    private static final String REG_TOKEN = "REG_TOKEN";
+
+    //        Button settings = (Button)findViewById(R.id.button);
+//
+//        //code for push notification
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+private static final String REG_TOKEN = "REG_TOKEN";
     @Override
     public void onTokenRefresh() {
         super.onTokenRefresh();

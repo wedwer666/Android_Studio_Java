@@ -32,36 +32,65 @@ public class Camera_Application extends AppCompatActivity {
 //            }
 //        });
 
-        Button settings = (Button)findViewById(R.id.button);
 
-        //code for push notification
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //code to set multiple buttons on the same page
+        defineButtons();
 
-            }
-        });
-
-        //code for google search in application
-        Button settings2 = (Button)findViewById(R.id.button2);
-        settings2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            //https://stackoverflow.com/questions/4930228/open-a-url-on-click-of-ok-button-in-android
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")));
-            }
-        });
-
-        //code for first radio button
-//        Button settings3 = (Button)findViewById(R.id.button3);
-//        settings3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                //code to select front camera on radio button pressed
-//            }
-//                                     }
-//
-//        );
     }
-}
+        public void defineButtons(){
+            findViewById(R.id.button).setOnClickListener(buttonClickListener);
+            findViewById(R.id.button2).setOnClickListener( buttonClickListener);
+            findViewById(R.id.radioButton).setOnClickListener(buttonClickListener);
+            findViewById(R.id.radioButton2).setOnClickListener(buttonClickListener);
+
+        }
+
+        private  View.OnClickListener buttonClickListener = new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId())
+                {
+                    case R.id.button2:
+                        //handle push notification
+
+
+
+                        break;
+                    case R.id.button:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com + ")));
+                        break;
+                    case R.id.radioButton:
+                        //handle radio button for front camera
+                        break;
+                    case R.id.radioButton2:
+                        //handle radio button for back camera
+                        break;
+                }
+            }
+        };
+
+
+//        Button settings = (Button)findViewById(R.id.button);
+//
+//        //code for push notification
+//        settings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        //code for google search in application
+//        Button settings2 = (Button)findViewById(R.id.button2);
+//        settings2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            //https://stackoverflow.com/questions/4930228/open-a-url-on-click-of-ok-button-in-android
+//            public void onClick(View v) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")));
+//            }
+//        });
+
+
+    }
+
