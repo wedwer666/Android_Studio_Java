@@ -1,0 +1,67 @@
+package com.example.lab1.labolatorul_nr_1;
+
+
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+
+public class Camera_Application extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera__application);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        Button settings = (Button)findViewById(R.id.button);
+
+        //code for push notification
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //code for google search in application
+        Button settings2 = (Button)findViewById(R.id.button2);
+        settings2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //https://stackoverflow.com/questions/4930228/open-a-url-on-click-of-ok-button-in-android
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")));
+            }
+        });
+
+        //code for first radio button
+//        Button settings3 = (Button)findViewById(R.id.button3);
+//        settings3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                //code to select front camera on radio button pressed
+//            }
+//                                     }
+//
+//        );
+    }
+}
