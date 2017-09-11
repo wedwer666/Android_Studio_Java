@@ -49,7 +49,7 @@ public class CameraApplication extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.button2:
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-                    notificationBuilder.setContentTitle("Notification Laboratory number 1");
+                    notificationBuilder.setContentTitle("Notification Laboratory ");
                     notificationBuilder.setContentText("test");
                     notificationBuilder.setAutoCancel(true);
                     notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
