@@ -6,11 +6,18 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -21,6 +28,9 @@ public class CameraApplication extends AppCompatActivity {
     private String googleBaseUrl = "http://www.google.com/search?q=";
     private boolean receiveNotifications;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,52 +38,61 @@ public class CameraApplication extends AppCompatActivity {
         setContentView(R.layout.activity_camera_application);
 
 
-
         //code to set multiple buttons on the same page
         defineButtons();
     }
 
+
     public void defineButtons() {
         findViewById(R.id.button).setOnClickListener(buttonClickListener);
         findViewById(R.id.button2).setOnClickListener(buttonClickListener);
-        findViewById(R.id.radioButton).setOnClickListener(buttonClickListener);
-        findViewById(R.id.radioButton2).setOnClickListener(buttonClickListener);
-        inputGoogle = (EditText) findViewById(R.id.editText);
-    }
+        RadioGroup group = (RadioGroup)findViewById(R.id.group);
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                Log.d("Tag", "Changed");
+                if (checkedId==R.id.A)
+                    Log.d("Tag", "Front Camera");
 
+                else if (checkedId==R.id.B)
+                    Log.d("Tag", "Back Camera");
+            }
+        });
+
+        inputGoogle = (EditText) findViewById(R.id.editText);
+
+
+    }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
+
             switch (v.getId()) {
                 case R.id.button2:
-                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-                    notificationBuilder.setContentTitle("Notification Laboratory ");
-                    notificationBuilder.setContentText("test");
-                    notificationBuilder.setAutoCancel(true);
-                    notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
-                    Intent intent = new Intent(getBaseContext(), CameraApplication.class);
-                    //search ib google Context_andoid_ app in the net
-                    PendingIntent pendingIntent = PendingIntent.getActivity(Application., 0, intent, PendingIntent.FLAG_ONE_SHOT);
+//                    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+//                    notificationBuilder.setContentTitle("Notification Laboratory ");
+//                    notificationBuilder.setContentText("test");
+//                    notificationBuilder.setAutoCancel(true);
+//                    notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+//                    Intent intent = new Intent(getBaseContext(), CameraApplication.class);
+//                    //search ib google Context_andoid_ app in the net
+//
+//                    PendingIntent pendingIntent = PendingIntent.getActivity(android.content.Context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 //                    notificationBuilder.setContentIntent(pendingIntent);
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    notificationManager.notify(0, notificationBuilder.build());
+//                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                    notificationManager.notify(0, notificationBuilder.build());
                     break;
                 case R.id.button:
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(googleBaseUrl + inputGoogle.getText())));
                     break;
-                case R.id.radioButton:
-                    //handle radio button for front camera
-//                        boolean checked = ((radioButton) v).isChecked();
 
-                    break;
-                case R.id.radioButton2:
-                    //handle radio button for back camera
-                    break;
             }
         }
     };
+
 
 
 //        Button settings = (Button)findViewById(R.id.button);
@@ -97,3 +116,22 @@ public class CameraApplication extends AppCompatActivity {
 //        });
 }
 
+//    RadioGroup rg;
+//    RadioButton rb;
+//code to check if radiobutton was pressed
+//    private void rbClick(View v)
+//    {
+//        int radiobuttonid = rg.getCheckedRadioButtonId();
+//        rb = (RadioButton) findViewById(radiobuttonid);
+//        Toast.makeText(getBaseContext(), rb.getText(), Toast.LENGTH_LONG).show();
+//    }
+
+
+//code for front camera and capturing image
+//        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//              Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(intent, 0);
+//            }
+//        });

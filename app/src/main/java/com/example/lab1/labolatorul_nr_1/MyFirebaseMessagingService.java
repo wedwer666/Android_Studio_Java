@@ -22,6 +22,32 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Intent intent = new Intent(getBaseContext(), CameraApplication.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+        notificationBuilder.setContentTitle("Notification for Laboratorul nr1");
+        notificationBuilder.setContentText(remoteMessage.getNotification().getBody());
+        notificationBuilder.setAutoCancel(true);
+        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        notificationBuilder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }
+//    RadioGroup rg;
+//    RadioButton rb;
+//code to check if radiobutton was pressed
+//    private void rbClick(View v)
+//    {
+//        int radiobuttonid = rg.getCheckedRadioButtonId();
+//        rb = (RadioButton) findViewById(radiobuttonid);
+//        Toast.makeText(getBaseContext(), rb.getText(), Toast.LENGTH_LONG).show();
+//    }
+
+
+//code for front camera and capturing image
+//        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//              Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(intent, 0);
+//            }
+//        });
