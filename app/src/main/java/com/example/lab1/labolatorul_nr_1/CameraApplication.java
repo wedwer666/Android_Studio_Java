@@ -140,7 +140,7 @@ public class CameraApplication extends AppCompatActivity  {
                     Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivity(intent);
                 case R.id.B:
-
+                    //will be code for front camera
                     Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE");
                     startActivity(intent2);
 
