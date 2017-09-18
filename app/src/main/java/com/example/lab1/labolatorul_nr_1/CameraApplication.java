@@ -1,20 +1,34 @@
 package com.example.lab1.labolatorul_nr_1;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -22,14 +36,26 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class CameraApplication extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.sql.Timestamp;
+
+
+
+public class CameraApplication extends AppCompatActivity  {
 
     private EditText inputGoogle;
     private String googleBaseUrl = "http://www.google.com/search?q=";
     private boolean receiveNotifications;
 
-
-
+//    @Override
+//    public void onClick(View v) {
+//        Intent nextPage = new Intent(CameraApplication.this, SecondPage.class);
+//        startActivity(nextPage);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,33 +63,55 @@ public class CameraApplication extends AppCompatActivity {
 
         setContentView(R.layout.activity_camera_application);
 
-
         //code to set multiple buttons on the same page
         defineButtons();
     }
 
+//    Using the onClick attribute of the Button
+//    public void goToAnActivity(View view) {
+//        startActivity(new Intent(CameraApplication.this, CameraApplication.class));
+////        Intent Intent = new Intent(this, FrontBackCamera.class);
+////        startActivity(Intent);
+//    }
+//
+//    public void goToAnotherActivity(View view) {
+//        Intent Intent = new Intent(this, CameraApplication.class);
+//        startActivity(Intent);
+//    }
 
+    String str;
     public void defineButtons() {
         findViewById(R.id.button).setOnClickListener(buttonClickListener);
         findViewById(R.id.button2).setOnClickListener(buttonClickListener);
+        findViewById(R.id.A).setOnClickListener(buttonClickListener);
+        findViewById(R.id.B).setOnClickListener(buttonClickListener);
         RadioGroup group = (RadioGroup)findViewById(R.id.group);
-        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                Log.d("Tag", "Changed");
-                if (checkedId==R.id.A)
-                    Log.d("Tag", "Front Camera");
 
-                else if (checkedId==R.id.B)
-                    Log.d("Tag", "Back Camera");
-            }
-        });
+//        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+//                Log.d("Tag", "Changed");
+//                if (checkedId==R.id.A) {
+//                    Log.d("Tag", "Front Camera");
+////                    str = "button1Text";
+//
+//                }
+//                else if (checkedId==R.id.B) str = "button2Text";
+//                    Log.d("Tag", "Back Camera");
+//            }
+//        });
 
         inputGoogle = (EditText) findViewById(R.id.editText);
 
 
     }
+
+
+
+
+
+
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
 
@@ -88,6 +136,13 @@ public class CameraApplication extends AppCompatActivity {
                 case R.id.button:
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(googleBaseUrl + inputGoogle.getText())));
                     break;
+                case R.id.A:
+                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                    startActivity(intent);
+                case R.id.B:
+
+                    Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE");
+                    startActivity(intent2);
 
             }
         }
@@ -135,3 +190,4 @@ public class CameraApplication extends AppCompatActivity {
 //                startActivityForResult(intent, 0);
 //            }
 //        });
+
