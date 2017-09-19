@@ -50,6 +50,7 @@ public class CameraApplication extends AppCompatActivity  {
     private EditText inputGoogle;
     private String googleBaseUrl = "http://www.google.com/search?q=";
     private boolean receiveNotifications;
+    Intent intent;
 
 //    @Override
 //    public void onClick(View v) {
@@ -137,13 +138,24 @@ public class CameraApplication extends AppCompatActivity  {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(googleBaseUrl + inputGoogle.getText())));
                     break;
                 case R.id.A:
-                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                    startActivity(intent);
+                    Intent launchIntent2 = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+                    launchIntent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    launchIntent2.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_BACK);
+                    launchIntent2.putExtra("android.intent.extras.LENS_FACING_BACK", 1);
+                    launchIntent2.putExtra("android.intent.extra.USE_BACK_CAMERA", true );
+                    startActivity(launchIntent2);
+//                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+//                    startActivity(intent);
+                    break;
                 case R.id.B:
                     //will be code for front camera
-                    Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE");
-                    startActivity(intent2);
-
+                    Intent launchIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    launchIntent.putExtra("android.intent.extras.CAMERA_FACING", android.hardware.Camera.CameraInfo.CAMERA_FACING_FRONT);
+                    launchIntent.putExtra("android.intent.extras.LENS_FACING_FRONT", 1);
+                    launchIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
+                    startActivity(launchIntent);
+                    break;
             }
         }
     };
