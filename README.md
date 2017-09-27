@@ -33,4 +33,4 @@ Explain what these tests test and why
 
 ## License
 
-This project was done during Mobile and Web Development Course  at Tehnical University of Moldova, Information Technolgy.
+This project was done during Mobile Course  at Tehnical University of Moldova, Information Technolgy.
